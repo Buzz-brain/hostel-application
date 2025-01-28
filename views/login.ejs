@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="login-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Login</button>
+  </form>
+  <p>Don't have an account? <a href="/register">Register here</a>.</p>
+  <script>
+    const loginForm = document.getElementById('login-form');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+        if (data.message) {
+          localStorage.setItem('username', username);
+          window.location.href = '/hostels';
+        } 
+      } catch (error) {
+        console.error(error);
+        alert('Error logging in');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

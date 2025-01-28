@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Hostel Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet" />
+    <script
+        src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000"
+        data-border-radius="small"></script>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png"
+                            alt="University Logo" />
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8"><a href="#"
+                            class="border-custom text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a><a
+                            href="#"
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Applications</a><a
+                            href="#"
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Manage
+                            Rooms</a><a href="#"
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Reports</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="relative">
+                            <button type="button"
+                                class="relative inline-flex items-center p-2 text-gray-400 hover:text-gray-500 transition-colors duration-300 transform hover:scale-110">
+                                <span class="sr-only">Notifications</span>
+                                <i class="fas fa-bell"></i>
+                                <span
+                                    class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                        <div class="ml-3 relative">
+                            <div class="flex items-center">
+                                <img class="h-8 w-8 rounded-full"
+                                    src="https://creatie.ai/ai/api/search-image?query=A professional headshot of a young student with a friendly smile, wearing casual attire, against a neutral background. The image should be well-lit and focused on the face, suitable for a profile picture.&width=100&height=100&orientation=squarish&flag=3cbec0fe-8a55-45ba-a578-be241245819b&flag=ffff5577-0713-41df-b431-7a7ac2ac8a9d&flag=c9c42c01-75bf-449c-b7e4-bb1f4ebf60dd&flag=351d95ed-3065-467d-83c6-a3f7498e2bb8&flag=ddaffda2-d5f7-4f44-aaf9-7e7100263185&flag=5bdac8ff-3718-489a-be84-576d50d53b35&flag=8be91b16-8ef2-4584-9452-d00925246007&flag=c791abfd-1481-406a-9e6a-d10661d93d12&flag=c4eb06d3-9474-4a3a-99e8-8ab4eb60dd35&flag=6ba6ba15-aae1-4e82-bf51-94f80cf3be75"
+                                    alt="" />
+                                <span class="ml-3 text-sm font-medium text-gray-700">Admin Panel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3">
+                <div class="bg-white shadow rounded-lg mb-8">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                          <h2 class="text-lg font-medium text-gray-900">Student Applications</h2>
+                          <div class="flex space-x-2">
+                            <button class="px-3 py-1 text-sm bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-all duration-300 cursor-pointer transform hover:scale-105">Approved</button>
+                            <button class="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded-full hover:bg-yellow-200 transition-all duration-300 cursor-pointer transform hover:scale-105">Pending</button>
+                            <button class="px-3 py-1 text-sm bg-red-100 text-red-800 rounded-full hover:bg-red-200 transition-all duration-300 cursor-pointer transform hover:scale-105">Rejected</button>
+                          </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                          <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                              <tr>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room Type</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hostel</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                              </tr>
+                            </thead>
+                        </thead>
+                        <tbody id="applications-tbody" class="bg-white divide-y divide-gray-200">
+                          <!-- Applications will be populated here -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="bg-white shadow rounded-lg">
+                    <div class="p-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Add Hostel</h2>
+                        <form id="add-hostel-form" class="space-y-6">
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">roomNumber</label>
+                                    <input type="text" id="roomNumber"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom transition-all duration-300 hover:border-custom" />
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-700">roomType</label>
+                                    <input type="text" id="roomType"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom transition-all duration-300 hover:border-custom" />
+                                </div>
+                                <div><label class="block text-sm font-medium text-gray-700">hostelBuilding</label>
+                                    <input type="text" id="hostelBuilding"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom transition-all duration-300 hover:border-custom" />
+                                </div>
+                                
+                                <div><label class="block text-sm font-medium text-gray-700">amount</label>
+                                    <input type="number" id="amount"
+                                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-custom focus:border-custom transition-all duration-300 hover:border-custom" />
+                                </div>
+                               
+                            </div>
+                            <div class="flex justify-end">
+                                <button id="add-hostel-btn"
+                                    class="bg-custom text-white px-4 py-2 rounded-md hover:bg-custom-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom transform hover:scale-105 transition-all duration-300">Add
+                                    Hostel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Statistics</h2>
+                        <div class="space-y-4">
+                            <div
+                                class="bg-gray-50 p-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer">
+                                <div class="text-sm text-gray-500">Total Applications</div>
+                                <div class="text-2xl font-semibold">127</div>
+                            </div>
+                            <div
+                                class="bg-green-50 p-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer">
+                                <div class="text-sm text-green-600">Approved</div>
+                                <div class="text-2xl font-semibold text-green-700">85</div>
+                            </div>
+                            <div
+                                class="bg-yellow-50 p-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer">
+                                <div class="text-sm text-yellow-600">Pending</div>
+                                <div class="text-2xl font-semibold text-yellow-700">32</div>
+                            </div>
+                            <div
+                                class="bg-red-50 p-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 cursor-pointer">
+                                <div class="text-sm text-red-600">Rejected</div>
+                                <div class="text-2xl font-semibold text-red-700">10</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white shadow rounded-lg p-6 mt-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Room Availability</h2>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center"><span class="text-sm text-gray-600">Single
+                                    Rooms</span><span class="text-sm font-medium">15 available</span></div>
+                            <div class="flex justify-between items-center"><span class="text-sm text-gray-600">Shared
+                                    Rooms</span><span class="text-sm font-medium">8 available</span></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </main>
+                <footer class="bg-white border-t border-gray-200 mt-8">
+                    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                        <div class="text-center text-sm text-gray-500">
+                            © 2024 University Housing System. All rights reserved.
+                        </div>
+                    </div>
+                </footer>
+                <script>
+                    document.querySelectorAll('input[name="room-type"]').forEach(radio => {
+                        radio.addEventListener('change', function () {
+                            document.querySelectorAll('input[name="room-type"]').forEach(r => {
+                                const icon = r.parentElement.querySelector('.fa-check-circle');
+                                if (r.checked) {
+                                    icon.classList.remove('invisible');
+                                    r.parentElement.classList.add('border-custom', 'ring-2', 'ring-custom');
+                                } else {
+                                    icon.classList.add('invisible');
+                                    r.parentElement.classList.remove('border-custom', 'ring-2', 'ring-custom');
+                                }
+                            });
+                        });
+                    });
+
+                    const addHostelForm = document.getElementById('add-hostel-form');
+                    const addHostelBtn = document.getElementById('add-hostel-btn');
+
+                    addHostelBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        const roomNumber = document.getElementById('roomNumber').value;
+                        const roomType = document.getElementById('roomType').value;
+                        const hostelBuilding = document.getElementById('hostelBuilding').value;
+                        const amount = document.getElementById('amount').value;
+
+                        try {
+                            const response = await fetch('/admin/add-hostel', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ roomNumber, roomType, hostelBuilding, amount })
+                            });
+
+                            const data = await response.json();
+                            console.log(data);
+                            alert('Hostel added successfully!');
+                        } catch (error) {
+                            console.error(error);
+                            alert('Error adding hostel');
+                        }
+        });
+
+
+const applicationsTbody = document.getElementById('applications-tbody');
+
+async function getApplications() {
+  try {
+    const response = await fetch('/admin/applications');
+    const data = await response.json();
+    const applications = data.applications;
+
+    applications.forEach((application) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-6 py-4 whitespace-nowrap">
+          <div class="flex items-center">
+            <img class="h-8 w-8 rounded-full" src="https://creatie.ai/ai/api/search-image?query=student&width=32&height=32&flag=a0141b6f-812d-4aec-a68e-d0637f5df5f2&flag=4bf16cc0-560d-4032-bb92-eb0f0ba70799&flag=dc35d2f7-ad0e-4756-9bdd-ee3600e8f33e" />
+            <div class="ml-4">
+              <div class="text-sm font-medium text-gray-900">${application.studentId}</div>
+              <div class="text-sm text-gray-500">${application.studentId}@university.edu</div>
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hostel ${application.hostelId}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hostel ${application.hostelId}</td>
+        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${application.status === 'Approved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">${application.status}</span></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          ${application.status === 'Approved' ? '' : `
+            <button class="approve-btn text-green-600 hover:text-green-900 mr-3 transition-all duration-300 transform hover:scale-110 hover:font-bold" data-id="${application._id}">Approve</button>
+            <button class="reject-btn text-red-600 hover:text-red-900 transition-all duration-300 transform hover:scale-110 hover:font-bold" data-id="${application._id}">Reject</button>
+          `}
+        </td>
+      `;
+      applicationsTbody.appendChild(row);
+    });
+
+    const approveBtns = document.querySelectorAll('.approve-btn');
+    const rejectBtns = document.querySelectorAll('.reject-btn');
+
+    approveBtns.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        try {
+          const response = await fetch(`/admin/application/${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'Approved' })
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Application approved!');
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+          alert('Application approved!');
+        }
+      });
+    });
+
+    rejectBtns.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.getAttribute('data-id');
+        try {
+          const response = await fetch(`/admin/application/${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'Rejected' })
+          });
+          const data = await response.json();
+          console.log(data);
+          alert('Application rejected!');
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+          alert('Error rejecting application');
+        }
+      });
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getApplications();
+
+
+
+
+    </script>
