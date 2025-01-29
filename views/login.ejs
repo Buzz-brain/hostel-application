@@ -18,31 +18,34 @@
   </form>
   <script>
     const loginForm = document.getElementById('login-form');
-
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        const response = await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username, password })
-        });
-
-        const data = await response.json();
-        if (data.message) {
-          localStorage.setItem('username', username);
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await response.json();
+      if (data.message) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('userId', data.userId);
+        if (data.role === 'admin') {
+          window.location.href = '/admin';
+        } else {
           window.location.href = '/hostels';
-        } 
-      } catch (error) {
-        console.error(error);
-        alert('Error logging in');
+        }
       }
-    });
+    } catch (error) {
+      console.error(error);
+      alert('Error logging in');
+    }
+  });
+
   </script>
 
 </body>

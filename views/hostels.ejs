@@ -21,10 +21,8 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <img class="h-8 w-auto" src="https://ai-public.creatie.ai/gen_page/logo_placeholder.png"
-                            alt="University Logo" />
                     </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <div class="sm:ml-6 sm:flex sm:space-x-8">
                         <a href="#"
                             class="border-custom text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a>
                     </div>
@@ -32,10 +30,10 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div class="relative">
-                            <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                            <div class="sm:ml-6 sm:flex sm:items-center">
                                 <div class="ml-3 relative">
                                     <div class="flex items-center">
-                                        <span class="ml-3 text-sm font-medium text-gray-700"></span>
+                                        <span class="ml-3 text-sm font-medium text-gray-700" id="username"></span>
                                     </div>
                                 </div>
                             </div>
@@ -57,6 +55,8 @@
                     </div>
                 </div>
 
+                <div id="application-status"></div>
+
                 <div class="bg-white shadow rounded-lg transform transition-all duration-300 hover:shadow-lg">
                     <div class="p-6">
                         <h2 class="text-lg font-medium text-gray-900 mb-6">Hostel Application Form</h2>
@@ -69,11 +69,26 @@
                                         <!-- Hostels will be populated here -->
                                     </select>
                                 </div>
-                                <!-- Rest of the form remains the same -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Study Habit</label>
+                                    <select id="studyHabit"
+                                        class="mt-1 block w-full !rounded-button border-gray-300 focus:border-custom focus:ring-custom transition-all duration-300 hover:border-custom">
+                                        <option value="withMusic">Study with Music</option>
+                                        <option value="withoutMusic">Study without Music</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Sleeping Habit</label>
+                                    <select id="sleepingHabit"
+                                        class="mt-1 block w-full !rounded-button border-gray-300 focus:border-custom focus:ring-custom transition-all duration-300 hover:border-custom">
+                                        <option value="darkRoom">Sleep in a dark room</option>
+                                        <option value="lightRoom">Sleep in a bright room</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit"
-                                    class="!rounded-button bg-custom px-4 py-2 text-sm font-medium text-white hover:bg-custom/90 focus:outline-none focus:ring-2 focus:ring-custom focus:ring-offset-2 transform transition-all duration-300 hover:scale-105 active:scale-95">Apply
+                                    class="!rounded-button mt-3 bg-custom px-4 py-2 text-sm font-medium text-white hover:bg-custom/90 focus:outline-none focus:ring-2 focus:ring-custom focus:ring-offset-2 transform transition-all duration-300 hover:scale-105 active:scale-95">Apply
                                     for Hostel</button>
                             </div>
                         </form>
@@ -128,6 +143,8 @@
         </div>
     </footer>
     <script>
+
+
         document.querySelectorAll('input[name="room-type"]').forEach(radio => {
             radio.addEventListener('change', function () {
                 document.querySelectorAll('input[name="room-type"]').forEach(r => {
@@ -144,6 +161,9 @@
         });
 
 
+
+
+        // Get hostels
         const hostelSelect = document.getElementById('hostel-select');
 
         async function getHostels() {
@@ -165,12 +185,25 @@
 
         getHostels();
 
+
+
+
+        // Hostel Application
         const hostelApplicationForm = document.getElementById('hostel-application-form');
+        const studyHabit = document.getElementById('studyHabit').value;
+        const sleepingHabit = document.getElementById('sleepingHabit').value;
+
+        const user = document.getElementById('username')
+        user.innerText = localStorage.getItem('username');
 
         hostelApplicationForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const studentId = localStorage.getItem('username');
+            const studentId = localStorage.getItem('userId');
+
             const hostelId = hostelSelect.value;
+
+            console.log(studyHabit)
+            console.log(sleepingHabit)
 
             try {
                 const response = await fetch('/student/apply', {
@@ -178,7 +211,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ studentId, hostelId })
+                    body: JSON.stringify({ studentId, hostelId, studyHabit, sleepingHabit, })
                 });
 
                 const data = await response.json();
@@ -190,15 +223,21 @@
             }
         });
 
-        const applicationStatusDiv = document.getElementById('application-status');
+    const applicationStatusDiv = document.getElementById('application-status');
 
-        async function getApplicationStatus() {
-            try {
-                const studentId = localStorage.getItem('username');
-                const response = await fetch(`/student/application-status?studentId=${studentId}`);
-                const data = await response.json();
+
+
+
+    async function getApplicationStatus() {
+        try {
+            const studentId = localStorage.getItem('userId');
+            const response = await fetch(`/student/application-status?studentId=${studentId}`);
+            const data = await response.json();
+            if (data.message === 'Application not found') {
+                applicationStatusDiv.innerHTML = 'No application yet';
+                applicationStatusDiv.classList.add('text-gray-700', 'text-sm', 'font-medium', 'p-4');
+            } else {
                 const status = data.status;
-
                 let backgroundColor, textColor, iconClass, message;
                 switch (status) {
                     case 'Approved':
@@ -225,25 +264,36 @@
                         iconClass = 'fas fa-question-circle text-gray-400';
                         message = 'Unknown application status. Please contact the administration for more information.';
                 }
-
-                applicationStatusDiv.innerHTML = `
-      <div class="flex">
-        <div class="flex-shrink-0">
-          <i class="${iconClass}"></i>
-        </div>
-        <div class="ml-3">
-<h3 class="text-sm font-medium ${textColor}">Application ${status}</h3>
-          <p class="mt-2 text-sm text-gray-700">${message}</p>
-        </div>
-      </div>
-    `;
+                applicationStatusDiv.innerHTML = `<div class="flex"> <div class="flex-shrink-0"> <i class="${iconClass}"></i> </div> <div class="ml-3"> <h3 class="text-sm font-medium ${textColor}">Application ${status}</h3> <p class="mt-2 text-sm text-gray-700">${message}</p> </div> </div>`;
                 applicationStatusDiv.classList.add(backgroundColor);
                 applicationStatusDiv.classList.add('border', 'border-gray-200', 'rounded-lg', 'p-4');
-            } catch (error) {
-                console.error(error);
             }
+        } catch (error) {
+            console.error(error);
         }
+    }
 
-        getApplicationStatus();
+    getApplicationStatus();
+
+
+
+
+
+
+
+
+// async function getStatus(studentId) {
+//         const response = await fetch(`/student/application-status?studentId=${studentId}`);
+//         const data = await response.json();
+
+//         const statusDiv = document.getElementById('application-status');
+//         statusDiv.innerHTML = `Status: ${data.status}`;
+//         if (data.roommate) {
+//             statusDiv.innerHTML += `<br>Matched with: ${data.roommate}`;
+//         }
+//     }
+
+    // Call the function with the logged-in student's ID
+    // getStatus('12345'); // Replace '12345' with the actual student ID
 
     </script>
